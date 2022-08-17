@@ -21,7 +21,7 @@
                       satisfies not($ten-digits[$pos] = $ten-digits[$pos - 1]
                                      and $ten-digits[$pos] = $ten-digits[$pos - 2])">Es dürfen nicht drei gleiche Ziffern aufeinanderfolgen.</xsl:assert>
     <xsl:variable name="pz" select="gi:tax-id-checksum($ten-digits)" as="xs:integer"/>
-    <xsl:assert test="$pz = $digits[last()]">Die Prüfziffer muss <xsl:value-of select="$pz"/> lauten.</xsl:assert>
+    <xsl:assert test="$pz = $digits[last()]" expand-text="yes">Die Prüfziffer muss {$pz} lauten.</xsl:assert>
   </xsl:template>
 
   <xsl:function name="gi:tax-id-checksum" as="xs:integer">
