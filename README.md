@@ -5,7 +5,7 @@ This XSLT program implements the checksum calculation algorithm described in [St
 
 ## Invocation
 
-(Assumption: You have a wrapper script that invokes Saxon (should run with any edition, at least version 9.8), called `saxon`)
+Assumption: You have a wrapper script that invokes Saxon (should run with any edition, at least version 9.8), called `saxon`
 
 ```
 saxon -xsl:SteuerIDPruefZiffer.xsl -it -ea num=57549285017
