@@ -20,7 +20,7 @@
     <xsl:assert test="every $pos in (3 to 10)
                       satisfies not($ten-digits[$pos] = $ten-digits[$pos - 1]
                                      and $ten-digits[$pos] = $ten-digits[$pos - 2])">Es dürfen nicht drei gleiche Ziffern aufeinanderfolgen.</xsl:assert>
-    <xsl:variable name="pz" select="((11 - gi:tax-id-checksum($ten-digits))[not(. = 10)], 0)[1]"/>
+    <xsl:variable name="pz" select="gi:tax-id-checksum($ten-digits)"/>
     <xsl:assert test="$pz = $digits[last()]">Die Prüfziffer muss <xsl:value-of select="$pz"/> lauten.</xsl:assert>
   </xsl:template>
 
@@ -30,7 +30,7 @@
       <xsl:param name="m10" select="0" as="xs:integer"/>
       <xsl:param name="m11" select="10" as="xs:integer"/>
       <xsl:on-completion>
-        <xsl:sequence select="$m11"/>
+        <xsl:sequence select="((11 - $m11)[not(. = 10)], 0)[1]"/>
       </xsl:on-completion>
       <xsl:variable name="new-m10" select="let $tmp := (. + $m11) mod 10 
                                            return if ($tmp = 0) then 10 else $tmp" as="xs:integer"/>
