@@ -19,7 +19,7 @@
     <xsl:assert test="count(distinct-values($ten-digits)) = (8, 9)">Zwei oder drei der ersten zehn Ziffern müssen gleich sein.</xsl:assert>
     <xsl:assert test="every $pos in (3 to 10)
                       satisfies not($ten-digits[$pos] = $ten-digits[$pos - 1]
-                                     and $ten-digits[$pos] = $ten-digits[$pos - 2])">Es dürfen nicht drei gleiche Ziffern aufeinanderfolgen.</xsl:assert>
+                                    and $ten-digits[$pos] = $ten-digits[$pos - 2])">Es dürfen nicht drei gleiche Ziffern aufeinanderfolgen.</xsl:assert>
     <xsl:variable name="pz" select="gi:tax-id-checksum($ten-digits)" as="xs:integer"/>
     <xsl:assert test="$pz = $digits[last()]" expand-text="yes">Die Prüfziffer muss {$pz} lauten.</xsl:assert>
   </xsl:template>
@@ -32,7 +32,7 @@
       <xsl:on-completion>
         <xsl:sequence select="((11 - $m11)[not(. = 10)], 0)[1]"/>
       </xsl:on-completion>
-      <xsl:variable name="new-m10" select="let $tmp := (. + $m11) mod 10 
+      <xsl:variable name="new-m10" select="let $tmp := (. + $m11) mod 10
                                            return if ($tmp = 0) then 10 else $tmp" as="xs:integer"/>
       <xsl:next-iteration>
         <xsl:with-param name="m10" select="$new-m10" as="xs:integer"/>
